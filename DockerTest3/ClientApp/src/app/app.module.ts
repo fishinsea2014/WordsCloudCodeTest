@@ -9,7 +9,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { WordCloudComponent } from './word-cloud/word-cloud.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule, MatInputModule, MatButtonModule} from "@angular/material"
+import {MatFormFieldModule, MatInputModule, MatButtonModule} from "@angular/material";
+import { TagCloudModule } from "angular-tag-cloud-module";
 
 @NgModule({
    declarations: [
@@ -17,6 +18,7 @@ import {MatFormFieldModule, MatInputModule, MatButtonModule} from "@angular/mate
       NavMenuComponent,
       HomeComponent,
       WordCloudComponent,
+
       
       //MatInputModule
    ],
@@ -28,6 +30,7 @@ import {MatFormFieldModule, MatInputModule, MatButtonModule} from "@angular/mate
       ReactiveFormsModule,
       MatInputModule,
       MatButtonModule,
+      TagCloudModule,      
       RouterModule.forRoot([
         { path: '', component: HomeComponent, pathMatch: 'full' },
         { path: 'word-cloud', component: WordCloudComponent },

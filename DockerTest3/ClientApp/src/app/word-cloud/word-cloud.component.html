@@ -8,5 +8,13 @@
     </mat-form-field>
     <button mat-raised-button type="submit" [disabled]="urlString.invalid">Submit</button>
   </form>
+</div>
 
+<div>
+  <angular-tag-cloud
+    [data]="data"
+    [width]="options.width"
+    [height]="options.height"
+    [overflow]="options.overflow">
+  </angular-tag-cloud>
 </div>
