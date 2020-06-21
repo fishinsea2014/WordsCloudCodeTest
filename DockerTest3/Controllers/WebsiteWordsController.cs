@@ -23,12 +23,13 @@ namespace DockerTest3.Controllers
             _htmlWordService = htmlWordService;
         }
 
-        [HttpPost]
-        [Route("CreateWordsList")]
-        public string CreateWordsList([FromBody]string stringUrl)
+        [HttpGet]
+        [Route("CreateWordsList/{url}")]
+        public string CreateWordsList([FromRoute]string url)
         {
+
             string res = _htmlWordService.GetHtmlWords().ToString();
-            return $"Get words from {stringUrl} and {res}";
+            return $"Get words from {url} and {res}";
         }
     }
 }
