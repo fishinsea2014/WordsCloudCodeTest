@@ -1,4 +1,5 @@
 ﻿using DockerTest3.Entities;
+using DockerTest3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,15 @@ namespace DockerTest3.Services
 {
     public class HtmlWordsService : IHtmlWordService
     {
-        public IEnumerable<HtmlWord> GetHtmlWords()
+        public IEnumerable<HtmlWord> GetHtmlWords(string url)
         {
+
             List < HtmlWord > words= new List<HtmlWord>();
+            string _url;
+            public HtmlWordsService ()
+            {
+
+            }
             HtmlWord htmlWord = new HtmlWord
             {
                 SaltedHash="ssss",
@@ -21,5 +28,14 @@ namespace DockerTest3.Services
 
             return words;
         }
+
+        public async Task<IEnumerable<HtmlWordDto>> GetWordCloudData(string url)
+            //public IEnumerable<HtmlWordDto> GetWordCloudData(string url)
+        {
+
+            return ("Ok");
+        }
+
+
     }
 }

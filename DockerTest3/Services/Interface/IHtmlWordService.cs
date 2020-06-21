@@ -1,4 +1,5 @@
 ﻿using DockerTest3.Entities;
+using DockerTest3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace DockerTest3.Services
 {
     public interface IHtmlWordService
     {
-        IEnumerable<HtmlWord> GetHtmlWords();
+        IEnumerable<HtmlWord> GetHtmlWords(string url);
+        IEnumerable<HtmlWordDto> GetWordCloudData(string url);
+
     }
 }
