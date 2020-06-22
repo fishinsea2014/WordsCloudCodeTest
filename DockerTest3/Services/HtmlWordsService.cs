@@ -129,7 +129,9 @@ namespace DockerTest3.Services
         private IList<string> GetWordsFromString(string str)
         {
             IList<string> strList = new List<string>();
-            Regex reg = new Regex("([a-zA-Z]+)|([A-Z][a-z]*)");
+            //Regex reg = new Regex("([a-zA-Z]+)|([A-Z][a-z]*)");
+            Regex reg = new Regex("(?:([A-Z][a-z]*)|([a-zA-Z]+))");
+
             MatchCollection matchList = reg.Matches(str);
             foreach (Match m in matchList)
             {
