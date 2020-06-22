@@ -35,6 +35,12 @@ namespace DockerTest3.Services
             return words;
         }
 
+        /// <summary>
+        /// Fetch words from a website page, count the frequencies,  
+        /// and then put them into a list of word objects.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<HtmlWordDto>> GetWordCloudData(string url)
         {
             List<HtmlWordDto> wordCloudData = new List<HtmlWordDto>();
@@ -81,6 +87,12 @@ namespace DockerTest3.Services
             return wordsCount;
         }
 
+        /// <summary>
+        /// If a non-English character found, then not a English word and return true.
+        /// Else it's a English word and return false. 
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         private bool IsNotWord(string str)
         {
             Regex regExp = new Regex ("[ \\[ \\] \\^ \\-_*×――(^)$%~!@#$…&%￥—+=<>《》!！??？:：•`·、。，；,.;\"‘’“”-]");
@@ -105,13 +117,7 @@ namespace DockerTest3.Services
 
             if (node.InnerText.Trim() != null)
             {                
-                string innerText = node.InnerText.Trim();
-                //Char[] splitChar = new Char[]
-                //{
-                //    ' ',',','.','!','\n','\r'
-                //};
-                //List<string> innerTextList = innerText.Split(splitChar).ToList();
-                //_words.AddRange(innerTextList);
+                string innerText = node.InnerText.Trim();                
                 _words.AddRange(GetWordsFromString(innerText));
             }
             Console.WriteLine(node.Name);
@@ -126,10 +132,18 @@ namespace DockerTest3.Services
             return;
         }
 
+        /// <summary>
+        /// Extract words from a string, which is the content of a node here.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         private IList<string> GetWordsFromString(string str)
         {
             IList<string> strList = new List<string>();
-            //Regex reg = new Regex("([a-zA-Z]+)|([A-Z][a-z]*)");
+            //Utilise regex to extract word from a string, 
+            //There are two regex condition
+            //1. Matching camal case
+            //2. Matching English characters.
             Regex reg = new Regex("(?:([A-Z][a-z]*)|([a-zA-Z]+))");
 
             MatchCollection matchList = reg.Matches(str);
@@ -142,7 +156,11 @@ namespace DockerTest3.Services
         }
 
 
-
+        /// <summary>
+        /// Fetch html content from a website page.
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         private async Task<string> ParseHtml(string url)
         {
             string responseBody = string.Empty;
