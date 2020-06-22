@@ -8,6 +8,6 @@ namespace DockerTest3.Models
     public class HtmlWordDto
     {
         public string Text { get; set; }
-        public int Count { get; set; }
+        public int Weight { get; set; }
     }
 }

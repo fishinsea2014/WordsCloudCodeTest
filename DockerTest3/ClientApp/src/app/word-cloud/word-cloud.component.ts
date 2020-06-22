@@ -40,7 +40,12 @@ export class WordCloudComponent implements OnInit {
 
   submitUrl(){
     console.log(this.urlString.value);
-    this.fetchWordsService.getWordsData();
+    this.fetchWordsService.getWordsData(this.urlString.value)
+    .subscribe(
+      data =>{        
+        this.data = data
+      }
+    );
   }
 
 }

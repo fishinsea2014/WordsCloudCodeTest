@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -28,14 +29,14 @@ namespace DockerTest3.Controllers
         }
 
         [HttpGet]
-        [Route("CreateWordsList/{url}")]
-        public async Task<string> CreateWordsListAsync([FromRoute]string url)
+        [Route("CreateWordCloud/{urlStr}")]
+        public async Task<ActionResult<IEnumerable<HtmlWordDto>>> CreateWordCloudAsync([FromRoute]string urlStr)
         {
-            List<HtmlWordDto> wordList = await _htmlWordService.GetWordCloudData(url);
-
-            string res = _htmlWordService.GetHtmlWords(url).ToString();
-            string urlNew = System.Web.HttpUtility.UrlDecode(url);
-            return $"Get words from {url}, {urlNew} and {res}";
+            //List<HtmlWordDto> wordList = await _htmlWordService.GetWordCloudData(url);
+            string url = System.Web.HttpUtility.UrlDecode(urlStr);
+            var res = await _htmlWordService.GetWordCloudData(url);
+            
+            return Ok(res);
         }
     }
 }
