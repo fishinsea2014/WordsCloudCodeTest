@@ -1,6 +1,10 @@
 ﻿using DockerTest3.Entities;
 using DockerTest3.Models;
 using HtmlAgilityPack;
+using Jason.Common.Helper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -14,27 +18,26 @@ namespace DockerTest3.Services
     public class HtmlWordsService : IHtmlWordService
     {
         List<string> _words;
-        public HtmlWordsService()
+        private readonly WordsDbContext _wordsDbContext;
+        private readonly ILogger<HtmlWordsService> _logger;
+        private readonly SaltHashHelper _saltHashHelper;
+        public HtmlWordsService(
+            WordsDbContext wordsDbContext, 
+            ILogger<HtmlWordsService> logger,
+            SaltHashHelper saltHashHelper
+            )
         {
             _words = new List<string>();
+            _wordsDbContext = wordsDbContext;
+            _logger = logger;
+            _saltHashHelper = saltHashHelper;
 
         }
-        public IEnumerable<HtmlWord> GetHtmlWords(string url)
+        public IEnumerable<HtmlWord> GetAllWords()
         {
-            //TODO: here is test data,
-            List < HtmlWord > words= new List<HtmlWord>();
-           
-            HtmlWord htmlWord = new HtmlWord
-            {
-                SaltedHash="ssss",
-                Word = "first",
-                count=4
-            };
-            words.Add(htmlWord);
-
-            return words;
+            return _wordsDbContext.HtmlWord.OrderByDescending(i =>i.count);
         }
-
+                
         /// <summary>
         /// Fetch words from a website page, count the frequencies,  
         /// and then put them into a list of word objects.
@@ -50,6 +53,9 @@ namespace DockerTest3.Services
             HtmlNode rootNode = htmlDocument.DocumentNode;
             GetWords(rootNode);
             IEnumerable<KeyValuePair<string, int>> wordsCount = CountWords();
+            //Save words count data into database
+            var x = _wordsDbContext.HtmlWord.OrderByDescending(i => i.count);
+
             foreach (var item in wordsCount)
             {
                 wordCloudData.Add(
@@ -58,10 +64,26 @@ namespace DockerTest3.Services
                         Text = item.Key,
                         Weight = item.Value
                     });
+                var wordInDb = x.Where(w => w.Word == item.Key).FirstOrDefault();
+                if (wordInDb == null)
+                {
+                    var hashedWord = _saltHashHelper.GenerateSaltedHash(64,item.Key);
+                    _wordsDbContext.Add(
+                        new HtmlWord
+                        {
+                            SaltedHash = hashedWord.Hash,
+                            Word = item.Key,
+                            count = item.Value,
+                            Salt = hashedWord.Salt
+                        }
+                   );
+                }
+                else
+                {
+                    wordInDb.count += item.Value;
+                }
             };
-
-            //Save the words count data in the Database
-
+            _wordsDbContext.SaveChanges();
 
             return wordCloudData;
         }

@@ -17,11 +17,13 @@ export class WordCloudComponent implements OnInit {
   };
 
   data:CloudData[]=[
-    {text: 'Weight-8-link-color', weight: 8 },
-    {text: 'Weight-100-link', weight: 100},
-    {text: 'Weight-1-link', weight: 1},
-    {text: 'Weight-2-link', weight: 2},
-    {text: 'Weight-3-link', weight: 3},
+    {text: 'Welcome to word cloud of Jason', weight: 6 },
+    {text: 'Please input a website URL', weight: 5},
+    {text: 'Word Cloud', weight: 3},
+    {text: 'Word Cloud', weight: 3},
+    {text: 'Word Cloud', weight: 3},
+    {text: 'Welcome', weight: 8},
+    {text: 'Hi', weight: 7},
   ]
 
   urlString = new FormControl('',[Validators.required]);

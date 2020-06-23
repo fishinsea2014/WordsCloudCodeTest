@@ -7,6 +7,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using DockerTest3.Models;
 using DockerTest3.Services;
+using HtmlAgilityPack;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -29,12 +30,32 @@ namespace DockerTest3.Controllers
         }
 
         [HttpGet]
+        public ActionResult<IEnumerable<HtmlWordDto>> GetWords()
+        {
+            List<HtmlWordDto> dtoList = new List<HtmlWordDto>();
+            var words = _htmlWordService.GetAllWords();
+            foreach (var word in words)
+            {
+                dtoList.Add(
+                    new HtmlWordDto
+                    {
+                        Text = word.Word,
+                        Weight = word.count
+                    });
+            };
+            return Ok(dtoList);
+        }
+
+        [HttpGet]
         [Route("CreateWordCloud/{urlStr}")]
         public async Task<ActionResult<IEnumerable<HtmlWordDto>>> CreateWordCloudAsync([FromRoute]string urlStr)
         {
             //List<HtmlWordDto> wordList = await _htmlWordService.GetWordCloudData(url);
             string url = System.Web.HttpUtility.UrlDecode(urlStr);
             var res = await _htmlWordService.GetWordCloudData(url);
+
+            //注入hash helper
+            //保存数据，注入dbcontext
             
             return Ok(res);
         }

@@ -1,0 +1,9 @@
+E:\00_TrustPower_Test\WordsCloudCodeTest\Jason.Common.Helper\bin\Debug\netcoreapp3.1\Jason.Common.Helper.deps.json
+E:\00_TrustPower_Test\WordsCloudCodeTest\Jason.Common.Helper\bin\Debug\netcoreapp3.1\Jason.Common.Helper.dll
+E:\00_TrustPower_Test\WordsCloudCodeTest\Jason.Common.Helper\bin\Debug\netcoreapp3.1\Jason.Common.Helper.pdb
+E:\00_TrustPower_Test\WordsCloudCodeTest\Jason.Common.Helper\obj\Debug\netcoreapp3.1\Jason.Common.Helper.csprojAssemblyReference.cache
+E:\00_TrustPower_Test\WordsCloudCodeTest\Jason.Common.Helper\obj\Debug\netcoreapp3.1\Jason.Common.Helper.AssemblyInfoInputs.cache
+E:\00_TrustPower_Test\WordsCloudCodeTest\Jason.Common.Helper\obj\Debug\netcoreapp3.1\Jason.Common.Helper.AssemblyInfo.cs
+E:\00_TrustPower_Test\WordsCloudCodeTest\Jason.Common.Helper\obj\Debug\netcoreapp3.1\Jason.Common.Helper.csproj.CoreCompileInputs.cache
+E:\00_TrustPower_Test\WordsCloudCodeTest\Jason.Common.Helper\obj\Debug\netcoreapp3.1\Jason.Common.Helper.dll
+E:\00_TrustPower_Test\WordsCloudCodeTest\Jason.Common.Helper\obj\Debug\netcoreapp3.1\Jason.Common.Helper.pdb

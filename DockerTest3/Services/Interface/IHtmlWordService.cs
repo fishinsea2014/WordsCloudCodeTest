@@ -9,7 +9,7 @@ namespace DockerTest3.Services
 {
     public interface IHtmlWordService
     {
-        IEnumerable<HtmlWord> GetHtmlWords(string url);
+        IEnumerable<HtmlWord> GetAllWords();
         Task<IEnumerable<HtmlWordDto>> GetWordCloudData(string url);
 
     }

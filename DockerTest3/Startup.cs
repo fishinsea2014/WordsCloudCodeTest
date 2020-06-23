@@ -1,8 +1,11 @@
+using DockerTest3.Entities;
 using DockerTest3.Services;
+using Jason.Common.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,6 +33,10 @@ namespace DockerTest3
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.AddDbContext<WordsDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("Default"))
+                );
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Website Words Cloud API", Version = "v1" });                
@@ -37,6 +44,9 @@ namespace DockerTest3
 
             //Inject html words service
             services.AddTransient<IHtmlWordService, HtmlWordsService>();
+
+            //Inject salt hash helper
+            services.AddSingleton<SaltHashHelper>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

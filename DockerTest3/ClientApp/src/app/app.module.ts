@@ -11,6 +11,7 @@ import { WordCloudComponent } from './word-cloud/word-cloud.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule, MatInputModule, MatButtonModule} from "@angular/material";
 import { TagCloudModule } from "angular-tag-cloud-module";
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
    declarations: [
@@ -18,12 +19,10 @@ import { TagCloudModule } from "angular-tag-cloud-module";
       NavMenuComponent,
       HomeComponent,
       WordCloudComponent,
-
-      
-      //MatInputModule
+      //MatInputModule,
+      AdminComponent
    ],
-   imports: [
-      BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+   imports: [      
       HttpClientModule,
       FormsModule,
       MatFormFieldModule,
@@ -34,6 +33,7 @@ import { TagCloudModule } from "angular-tag-cloud-module";
       RouterModule.forRoot([
         { path: '', component: HomeComponent, pathMatch: 'full' },
         { path: 'word-cloud', component: WordCloudComponent },
+        { path: 'admin', component: AdminComponent },
       ]),
       BrowserAnimationsModule
     ],
