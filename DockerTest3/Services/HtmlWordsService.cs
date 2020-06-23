@@ -49,7 +49,7 @@ namespace DockerTest3.Services
             htmlDocument.LoadHtml(htmlContent);
             HtmlNode rootNode = htmlDocument.DocumentNode;
             GetWords(rootNode);
-            Dictionary<string, int> wordsCount = CountWords();
+            IEnumerable<KeyValuePair<string, int>> wordsCount = CountWords();
             foreach (var item in wordsCount)
             {
                 wordCloudData.Add(
@@ -60,6 +60,9 @@ namespace DockerTest3.Services
                     });
             };
 
+            //Save the words count data in the Database
+
+
             return wordCloudData;
         }
 
@@ -68,7 +71,7 @@ namespace DockerTest3.Services
         /// Save the result in a dictionary.
         /// </summary>
         /// <returns></returns>
-        private Dictionary<string, int> CountWords()
+        private IEnumerable<KeyValuePair<string, int>> CountWords()
         {
             Dictionary<string, int> wordsCount = new Dictionary<string, int>();
             foreach (string s in _words)
@@ -84,7 +87,11 @@ namespace DockerTest3.Services
                 wordsCount.Add(s, 1);
             }
 
-            return wordsCount;
+            //Choose top 100 words
+            var wordsDescending = from word in wordsCount orderby word.Value descending select word;
+            var topHundredWords = wordsDescending.Take(100);
+
+            return topHundredWords;
         }
 
         /// <summary>
