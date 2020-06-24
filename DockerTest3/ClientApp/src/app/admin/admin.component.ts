@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CloudWord } from '../domain/cloudWord';
 import { GetAllWordsService } from '../services/get-all-words.service';
-//import { MatTableDataSource, MatPaginator } from '@angular/material';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -21,7 +20,6 @@ export class AdminComponent implements OnInit {
     .subscribe(
       data =>{
         console.log(data);
-        //this.data=data;
         this.dataSource= new  MatTableDataSource<CloudWord>(data);
         this.dataSource.paginator = this.paginator;
       }

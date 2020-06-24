@@ -3,7 +3,7 @@
   <form class="input-url" #form="ngForm" (ngSubmit)="submitUrl()">
     <mat-form-field class="input-url" appearance="fill">
       <mat-label>Enter an website address</mat-label>
-      <input matInput placeholder="e.g. http://www.example.com" [formControl]="urlString" type="text" required>
+      <input matInput placeholder="e.g. http://www.example.com" [formControl]="urlString" type="text">
       <mat-error *ngIf="urlString.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <button mat-raised-button type="submit" [disabled]="urlString.invalid">Submit</button>

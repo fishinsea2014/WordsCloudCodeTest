@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators, ValidatorFn,AsyncValidatorFn, AbstractControl } from '@angular/forms';
 import { FetchWordsService } from '../services/fetch-words.service';
 import { CloudOptions, CloudData } from 'angular-tag-cloud-module';
+import { UrlService } from '../services/url.service';
+import {debounceTime,distinctUntilChanged, switchMap, map} from 'rxjs/operators'
+import { Observable } from 'rxjs';
+import {MatDialog} from '@angular/material';
+import { componentFactoryName } from '@angular/compiler';
 
 @Component({
   selector: 'app-word-cloud',
@@ -26,28 +31,62 @@ export class WordCloudComponent implements OnInit {
     {text: 'Hi', weight: 7},
   ]
 
-  urlString = new FormControl('',[Validators.required]);
+  urlString = new FormControl(null,Validators.required);
   getErrorMessage(){
     if (this.urlString.hasError('required')){
-      return "Please input a website address."
+      return "Please input a website address.";
+    }
+    if (this.urlString.hasError('invalidURL')){
+      return "Invalid URL";
     }
   } 
-  constructor(private fb:FormBuilder,
-              private fetchWordsService:FetchWordsService) { }
 
-  ngOnInit() {
- 
+  validateURL():AsyncValidatorFn{
+    return (control:AbstractControl):Observable<{[key:string] :any} | null> =>{
+      return this._urlService.validateUrl(control.value).pipe(
+        map(res => {
+          console.log(res);
+          return null;
+        },
+        err =>{
+          console.log(err);
+        }),
+        //map (res =>{res.code == "200" ? null : {"invalidURL":true}} ),
+        distinctUntilChanged(),
+        debounceTime(300),
+      )
 
+      // return control.valueChanges.pipe(
+      //   distinctUntilChanged(),
+      //   debounceTime(300),
+      //   switchMap(() =>this._urlService.validateUrl(control.value)),
+      //   map (res => res.code == "200" ? null : {"invalidURL":true})
+      // )
+    }
   }
+  constructor(private fb:FormBuilder,
+              private fetchWordsService:FetchWordsService,
+              private _urlService:UrlService,
+              private _dialog:MatDialog) { }
+
+  ngOnInit() {}
 
   submitUrl(){
-    console.log(this.urlString.value);
     this.fetchWordsService.getWordsData(this.urlString.value)
     .subscribe(
       data =>{        
         this.data = data;
+      },
+      err =>{
+        this._dialog.open(DialogGetWordErrorComponent);
       }
     );
   }
 
 }
+
+@Component({
+  selector:'dialog-get-wrods-error',
+  templateUrl:'dialog-get-wrods-error.html',
+})
+export class DialogGetWordErrorComponent{}

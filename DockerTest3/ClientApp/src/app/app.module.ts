@@ -7,9 +7,9 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { WordCloudComponent } from './word-cloud/word-cloud.component';
+import { WordCloudComponent, DialogGetWordErrorComponent } from './word-cloud/word-cloud.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule, MatInputModule, MatButtonModule, MatTableModule, MatPaginatorModule} from "@angular/material";
+import {MatFormFieldModule, MatInputModule, MatButtonModule, MatTableModule, MatPaginatorModule, MatDialogModule} from "@angular/material";
 import { TagCloudModule } from "angular-tag-cloud-module";
 import { AdminComponent } from './admin/admin.component';
 
@@ -21,6 +21,10 @@ import { AdminComponent } from './admin/admin.component';
       WordCloudComponent,
       //MatInputModule,
       AdminComponent,
+      DialogGetWordErrorComponent
+   ],
+   entryComponents:[
+    DialogGetWordErrorComponent
    ],
    imports: [      
       HttpClientModule,
@@ -32,6 +36,7 @@ import { AdminComponent } from './admin/admin.component';
       TagCloudModule, 
       MatTableModule,    
       MatPaginatorModule,
+      MatDialogModule,
       //MatPaginatorModule,
       //MatTableDataSource, 
       RouterModule.forRoot([
