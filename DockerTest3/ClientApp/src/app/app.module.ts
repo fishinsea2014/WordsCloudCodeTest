@@ -9,7 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { WordCloudComponent } from './word-cloud/word-cloud.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule, MatInputModule, MatButtonModule} from "@angular/material";
+import {MatFormFieldModule, MatInputModule, MatButtonModule, MatTableModule, MatPaginatorModule} from "@angular/material";
 import { TagCloudModule } from "angular-tag-cloud-module";
 import { AdminComponent } from './admin/admin.component';
 
@@ -20,7 +20,7 @@ import { AdminComponent } from './admin/admin.component';
       HomeComponent,
       WordCloudComponent,
       //MatInputModule,
-      AdminComponent
+      AdminComponent,
    ],
    imports: [      
       HttpClientModule,
@@ -29,7 +29,11 @@ import { AdminComponent } from './admin/admin.component';
       ReactiveFormsModule,
       MatInputModule,
       MatButtonModule,
-      TagCloudModule,      
+      TagCloudModule, 
+      MatTableModule,    
+      MatPaginatorModule,
+      //MatPaginatorModule,
+      //MatTableDataSource, 
       RouterModule.forRoot([
         { path: '', component: HomeComponent, pathMatch: 'full' },
         { path: 'word-cloud', component: WordCloudComponent },

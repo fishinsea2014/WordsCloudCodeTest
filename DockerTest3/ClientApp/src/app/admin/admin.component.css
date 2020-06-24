@@ -1,0 +1,10 @@
+table{
+    width:100%;
+}
+.container{
+    width: 60%;
+}
+
+.mat-header-cell{
+    font-size: large;
+}

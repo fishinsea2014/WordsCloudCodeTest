@@ -45,7 +45,7 @@ export class WordCloudComponent implements OnInit {
     this.fetchWordsService.getWordsData(this.urlString.value)
     .subscribe(
       data =>{        
-        this.data = data
+        this.data = data;
       }
     );
   }
