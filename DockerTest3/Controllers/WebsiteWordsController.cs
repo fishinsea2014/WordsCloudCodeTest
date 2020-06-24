@@ -50,12 +50,13 @@ namespace DockerTest3.Controllers
         [Route("CreateWordCloud/{urlStr}")]
         public async Task<ActionResult<IEnumerable<HtmlWordDto>>> CreateWordCloudAsync([FromRoute]string urlStr)
         {
-            //List<HtmlWordDto> wordList = await _htmlWordService.GetWordCloudData(url);
             string url = System.Web.HttpUtility.UrlDecode(urlStr);
             var res = await _htmlWordService.GetWordCloudData(url);
 
-            //注入hash helper
-            //保存数据，注入dbcontext
+            if (res == null)
+            {
+                return BadRequest("Invalid website");
+            }
             
             return Ok(res);
         }

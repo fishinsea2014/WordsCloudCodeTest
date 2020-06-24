@@ -48,6 +48,10 @@ namespace DockerTest3.Services
         {
             List<HtmlWordDto> wordCloudData = new List<HtmlWordDto>();
             string htmlContent = await ParseHtml(url);
+            if (htmlContent == String.Empty)
+            {
+                return null;
+            }
             HtmlDocument htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(htmlContent);
             HtmlNode rootNode = htmlDocument.DocumentNode;
@@ -198,9 +202,18 @@ namespace DockerTest3.Services
                 httpClient.DefaultRequestHeaders.Add("Method", "Get");
                 httpClient.DefaultRequestHeaders.Add("KeepAlive", "false");
                 httpClient.DefaultRequestHeaders.Add("UserAgent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-                HttpResponseMessage res = await httpClient.GetAsync(url);
-                res.EnsureSuccessStatusCode();
-                responseBody = await res.Content.ReadAsStringAsync();
+                try 
+                {
+                    HttpResponseMessage res = await httpClient.GetAsync(url);
+                    res.EnsureSuccessStatusCode();
+                    responseBody = await res.Content.ReadAsStringAsync();
+                }
+                catch(Exception err)
+                {
+                    _logger.LogError(err.Message);
+                }
+
+                
             };
             return responseBody;
         }
