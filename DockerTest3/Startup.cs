@@ -33,10 +33,14 @@ namespace DockerTest3
                 configuration.RootPath = "ClientApp/dist";
             });
 
+
+            //Inject dbcontext.
             services.AddDbContext<WordsDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("Default"))
                 );
 
+
+            //Inject swagger service
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Website Words Cloud API", Version = "v1" });                
@@ -62,6 +66,7 @@ namespace DockerTest3
                 app.UseHsts();
             }
 
+            //Config swagger
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

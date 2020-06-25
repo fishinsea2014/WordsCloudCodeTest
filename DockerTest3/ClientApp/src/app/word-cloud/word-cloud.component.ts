@@ -53,17 +53,10 @@ export class WordCloudComponent implements OnInit {
         err =>{
           console.log(err);
         }),
-        //map (res =>{res.code == "200" ? null : {"invalidURL":true}} ),
         distinctUntilChanged(),
         debounceTime(300),
       )
 
-      // return control.valueChanges.pipe(
-      //   distinctUntilChanged(),
-      //   debounceTime(300),
-      //   switchMap(() =>this._urlService.validateUrl(control.value)),
-      //   map (res => res.code == "200" ? null : {"invalidURL":true})
-      // )
     }
   }
   constructor(private fb:FormBuilder,
@@ -90,6 +83,7 @@ export class WordCloudComponent implements OnInit {
 
 }
 
+//Dialog component.
 @Component({
   selector:'dialog-get-wrods-error',
   templateUrl:'dialog-get-wrods-error.html',

@@ -22,7 +22,6 @@ export class AdminComponent implements OnInit {
    }
 
   ngOnInit() {
-    //this.showSpinner = true;
     
     this.getAllWordsService.getAllWords()    
     .subscribe(

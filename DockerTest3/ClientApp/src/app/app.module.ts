@@ -19,7 +19,6 @@ import { AdminComponent } from './admin/admin.component';
       NavMenuComponent,
       HomeComponent,
       WordCloudComponent,
-      //MatInputModule,
       AdminComponent,
       DialogGetWordErrorComponent
    ],
