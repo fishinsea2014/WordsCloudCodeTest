@@ -5,17 +5,19 @@ To find out details, please go to sample website: http://jasonqu1.eastus.cloudap
 
 # How to run?
 
-1. Clone the code to local.
+1. Clone the repo from remote to local.
 
-2. In root dir, which is "WordsCloudCodeTest\\DockerTest3" dir, run cmd command "dotnet ef database update" to install database locally.
+2. Update the database connection string in "WordsCloudCodeTest\\DockerTest3\appsetting.json".
 
-3. In front-end code dir, which is "WordsCloudCodeTest\\DockerTest3\ClientApp", run cmd command "npm install" to install front-end dependencies
+3. In root dir, which is "WordsCloudCodeTest\\DockerTest3" dir, run cmd command "dotnet ef database update" to install database locally.
 
-4. In clientapp, "npm install"
+4. In front-end code dir, which is "WordsCloudCodeTest\\DockerTest3\ClientApp", run cmd command "npm install" to install front-end dependencies
 
-5. In root dir, run "dotnet run" to start the program.
+5. In clientapp, "npm install"
 
-6. In browser, go to "https://localhost:7001".
+6. In root dir, run "dotnet run" to start the program.
+
+7. In browser, go to "https://localhost:7001".
 
    
 
