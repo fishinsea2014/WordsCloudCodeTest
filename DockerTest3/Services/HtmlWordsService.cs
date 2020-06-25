@@ -170,7 +170,7 @@ namespace DockerTest3.Services
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        private IList<string> GetWordsFromString(string str)
+        public IList<string> GetWordsFromString(string str)
         {
             IList<string> strList = new List<string>();
             //Utilise regex to extract word from a string, 
@@ -194,7 +194,7 @@ namespace DockerTest3.Services
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        private async Task<string> ParseHtml(string url)
+        public async Task<string> ParseHtml(string url)
         {
             string responseBody = string.Empty;
             using (HttpClient httpClient = new HttpClient())

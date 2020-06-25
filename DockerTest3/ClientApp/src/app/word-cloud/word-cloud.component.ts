@@ -15,6 +15,8 @@ import { componentFactoryName } from '@angular/compiler';
 })
 export class WordCloudComponent implements OnInit {
 
+  showSpinner=false;
+
   options:CloudOptions={
     width:1000,
     height:400,
@@ -72,12 +74,15 @@ export class WordCloudComponent implements OnInit {
   ngOnInit() {}
 
   submitUrl(){
+    this.showSpinner=true;
     this.fetchWordsService.getWordsData(this.urlString.value)
     .subscribe(
       data =>{        
         this.data = data;
+        this.showSpinner=false;
       },
       err =>{
+        this.showSpinner=false;
         this._dialog.open(DialogGetWordErrorComponent);
       }
     );

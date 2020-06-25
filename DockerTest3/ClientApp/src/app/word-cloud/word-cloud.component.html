@@ -1,5 +1,5 @@
 <div class="url-container">
-
+  <mat-spinner diameter="30"  value="20" *ngIf="showSpinner"></mat-spinner>
   <form class="input-url" #form="ngForm" (ngSubmit)="submitUrl()">
     <mat-form-field class="input-url" appearance="fill">
       <mat-label>Enter an website address</mat-label>

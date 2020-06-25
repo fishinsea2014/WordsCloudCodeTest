@@ -37,11 +37,11 @@ namespace Jason.Common.Helper
         /// <param name="storedHash">The hash value used to verify input</param>
         /// <param name="storedSalt">The salt value used to verify input</param>
         /// <returns></returns>
-        public bool VerifyStr(string inputStr, string storedHash, string storedSalt)
+        public bool VerifyStr(string inputStr, HashSalt data)
         {
-            var saltBytes = Convert.FromBase64String(storedSalt);
+            var saltBytes = Convert.FromBase64String(data.Salt);
             var rfc2898DriveBytes = new Rfc2898DeriveBytes(inputStr, saltBytes, 1000);
-            return Convert.ToBase64String(rfc2898DriveBytes.GetBytes(256)) == storedHash;
+            return Convert.ToBase64String(rfc2898DriveBytes.GetBytes(256)) == data.Hash;
         }
 
     }

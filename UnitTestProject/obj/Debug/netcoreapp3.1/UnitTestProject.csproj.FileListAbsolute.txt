@@ -152,3 +152,5 @@ E:\00_TrustPower_Test\WordsCloudCodeTest\UnitTestProject\bin\Debug\netcoreapp3.1
 E:\00_TrustPower_Test\WordsCloudCodeTest\UnitTestProject\bin\Debug\netcoreapp3.1\Castle.Core.dll
 E:\00_TrustPower_Test\WordsCloudCodeTest\UnitTestProject\bin\Debug\netcoreapp3.1\Moq.dll
 E:\00_TrustPower_Test\WordsCloudCodeTest\UnitTestProject\obj\Debug\netcoreapp3.1\UnitTestProject.csproj.CoreCompileInputs.cache
+E:\00_TrustPower_Test\WordsCloudCodeTest\UnitTestProject\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.json
+E:\00_TrustPower_Test\WordsCloudCodeTest\UnitTestProject\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.local.json

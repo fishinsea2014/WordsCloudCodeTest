@@ -23,16 +23,26 @@ namespace UnitTestProject
         public HtmlWordsServiceTest()
         {
             _dbOptions = new DbContextOptions<WordsDbContext>();
-            _wordsDbContext = new WordsDbContext(_dbOptions);
+            _wordsDbContext = new Mock<WordsDbContext>(_dbOptions).Object;
             _logger = new Mock<ILogger<HtmlWordsService>>().Object;
             _saltHashHelper = new SaltHashHelper();
             _htmlWordsService = new HtmlWordsService(_wordsDbContext,_logger,_saltHashHelper);
         }
         [Fact]
-        public async void GetWordCloudDataShould()
+        public async void  ParseHtmlShould()
         {
-            List< HtmlWordDto> res = (List<HtmlWordDto>) await _htmlWordsService.GetWordCloudData("http://www.google.com");
+            string url = "http://www.google.com";
+            string res = await _htmlWordsService.ParseHtml(url);
             Assert.NotEmpty(res);
+
+        }
+
+        [Fact]
+        public async void ParseHtmlShouldEmpty()
+        {
+            string url = "http://www.google.commm";
+            string res = await _htmlWordsService.ParseHtml(url);
+            Assert.Empty(res);
 
         }
     }
