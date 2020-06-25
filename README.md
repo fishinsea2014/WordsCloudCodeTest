@@ -27,7 +27,7 @@ To find out details, please go to sample website: http://jasonqu1.eastus.cloudap
 
 1. Back-end construction
 
-   ![](\Documents\back_end_structure.jpg)
+   ![](https://github.com/fishinsea2014/WordsCloudCodeTest/blob/master/Documents/Front_end_structure.jpg)
 
 2. Swagger
 
